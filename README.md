@@ -35,7 +35,10 @@ To run the backend, start by running `cd WhenInRomeAPI` to go into the
 The conda environments required are defined in "conda_environment.yml"
 
 To create the conda environment with the requirements you can run:
-`conda env create -f conda_environment.yml`
+`conda env create -f conda_environment.yml -n WhenInRomeEnv`
+
+activate the env:
+`conda activate WhenInRomeEnv`
 
 When the environment is created, please run:
 `uvicorn main:app --reload`

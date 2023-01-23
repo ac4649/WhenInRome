@@ -1,0 +1,59 @@
+# We create a RomanNumeralConverter class which will enable the conversion functionality
+from roman_numeral import RomanNumeral
+
+class RomanNumeralConverter:
+    def __init__(self, numeral : str):
+        self.numeral = numeral
+    
+    def convert_to_number( self ):
+        returned_number = 0
+        cur_numeral_count = 0
+        previous_numeral = ""
+        error = False
+        
+        # Let's start by going throught the numeral string and counting all the roman digits we find
+        # We then do checks for the 7 rules:
+        # 1. We check that repeatable numerals are only present 3 times
+        # 2. We check that non-repeatable numerals are not present more than once
+        for i in range(len(self.numeral)):
+            # We create the roman numeral for the current character
+            try:
+                cur_numeral = RomanNumeral(self.numeral[i])
+            except:
+                return "Invalid Numeral"
+            
+            # We check if our current numeral is the same as our previous numeral
+            if previous_numeral == cur_numeral.numeral:
+                # We check that it is greater than 2 because we have not yet incremented the count for the current numeral so it would be 3
+                if cur_numeral_count > 2:
+                    return "Invalid Numeral"
+            else:
+                cur_numeral_count = 0
+
+            if i + 1 == len(self.numeral):
+                # We are on the last numeral
+                print("Last numeral, so we just add it")
+                returned_number += cur_numeral.value
+            else:
+                # We need to check if the next number is greater, and if it is we need to subtract if possible
+                try:
+                    next_numeral = RomanNumeral(self.numeral[i+1])
+                except:
+                    return "Invalid Numeral"
+                
+                print(next_numeral.value)
+                if cur_numeral.value < next_numeral.value:
+                    if cur_numeral.subtractable:
+                        # We are allowed to subtract the current numeral
+                        returned_number -= cur_numeral.value
+                    else:
+                        # We are not allowe to subtract the current numeral, so we throw an error
+                        return "Invalid Numeral"
+                else:
+                    # If the next number isn't greater than our current one, we simply add the value
+                    returned_number += cur_numeral.value
+
+
+            previous_numeral = cur_numeral.numeral
+            cur_numeral_count += 1
+        return returned_number
