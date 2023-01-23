@@ -1,0 +1,77 @@
+# We create a RomanNumeralConverter class which will enable the conversion functionality
+from roman_numeral import RomanNumeral
+
+class RomanNumeralConverter:
+    def __init__(self, numeral : str = None, number : int = None):
+        self.numeral = numeral
+        self.number = number
+    
+    def convert_to_number( self ):
+
+        if not self.numeral:
+            raise Exception("No Numeral set")
+
+
+        returned_number = 0
+        previous_numerals = {}
+
+        # Let's start by going throught the numeral string and counting all the roman digits we find
+        # We then do checks for the rules:
+        # 1. We check that repeatable numerals are only present 3 times
+        # 2. We check that non-repeatable numerals are not present more than once
+        # 3. We subtract subtractable numerals from the sum if we are allowed to
+        for i in range(len(self.numeral)):
+            print(previous_numerals)
+            # We create the roman numeral for the current character
+            try:
+                cur_numeral = RomanNumeral(self.numeral[i])
+            except Exception as exception:
+                raise exception
+            # We check if our current numeral is the same as our previous numeral
+            if cur_numeral.numeral in previous_numerals:
+                # We have the same numeral, we need to check if we are allowed to repeat it
+                if cur_numeral.repeatable:
+                    # We need to check that we don't have 3 in a row
+                    # We have traversed this numeral more than twice (at least three times) so it is invalid
+                    if previous_numerals[cur_numeral.numeral] > 2:
+                        raise Exception("Invalid numeral: 4 or more repeatable numerals")
+                else:
+                    # WE are not allowed to repeat the numeral
+                    raise Exception("Invalid numeral: non-repeatable numeral is repeated")
+
+            if i + 1 == len(self.numeral):
+                # We are on the last numeral
+                returned_number += cur_numeral.value
+            else:
+                # We need to check if the next number is greater, and if it is we need to subtract if possible
+                try:
+                    next_numeral = RomanNumeral(self.numeral[i+1])
+                except Exception as exception:
+                    raise exception
+                
+                if cur_numeral.value < next_numeral.value:
+                    if cur_numeral.subtractable:
+                        # We are allowed to subtract the current numeral
+                        returned_number -= cur_numeral.value
+                    else:
+                        # We are not allowed to subtract the current numeral, so we throw an error
+                        raise Exception("Invalid numeral: cannot subtract this numeral")
+                else:
+                    # If the next number isn't greater than our current one, we simply add the value
+                    returned_number += cur_numeral.value
+
+            if cur_numeral.numeral in previous_numerals:
+                previous_numerals[cur_numeral.numeral] += 1
+            else:
+                previous_numerals[cur_numeral.numeral] = 1
+
+        self.number = returned_number
+        return returned_number
+
+    def convert_to_roman(self):
+        print("converting the number to roman")
+        if not self.number:
+            raise Exception("No Number set")
+
+        # The basic conversion of a number to roman numerals is to find the largest number we can subtract by and replace with the appropriate roman numeral and do this until we reach 0
+        
