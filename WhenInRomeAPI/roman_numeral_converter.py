@@ -14,9 +14,8 @@ class RomanNumeralConverter:
 
         returned_number = 0
         cur_numeral_count = 0
-        previous_numeral = ""
-        error = False
-        
+        previous_numerals = set()
+
         # Let's start by going throught the numeral string and counting all the roman digits we find
         # We then do checks for the rules:
         # 1. We check that repeatable numerals are only present 3 times
@@ -26,19 +25,18 @@ class RomanNumeralConverter:
             # We create the roman numeral for the current character
             try:
                 cur_numeral = RomanNumeral(self.numeral[i])
-            except:
-                return "Invalid Numeral"
-            
+            except Exception as exception:
+                raise exception
             # We check if our current numeral is the same as our previous numeral
-            if previous_numeral == cur_numeral.numeral:
+            if cur_numeral.numeral in previous_numerals:
                 # We have the same numeral, we need to check if we are allowed to repeat it
                 if cur_numeral.repeatable:
                     # We need to check that we don't have 3 in a row
                     if cur_numeral_count > 3:
-                        return "Invalid Numeral"
+                        raise Exception("Invalid numeral: 4 or more repeatable numerals")
                 else:
                     # WE are not allowed to repeat the numeral
-                    return "Invalid Numeral"
+                    raise Exception("Invalid numeral: non-repeatable numeral is repeated")
             else:
                 cur_numeral_count = 1
 
@@ -49,22 +47,22 @@ class RomanNumeralConverter:
                 # We need to check if the next number is greater, and if it is we need to subtract if possible
                 try:
                     next_numeral = RomanNumeral(self.numeral[i+1])
-                except:
-                    return "Invalid Numeral"
+                except Exception as exception:
+                    raise exception
                 
                 if cur_numeral.value < next_numeral.value:
                     if cur_numeral.subtractable:
                         # We are allowed to subtract the current numeral
                         returned_number -= cur_numeral.value
                     else:
-                        # We are not allowe to subtract the current numeral, so we throw an error
-                        return "Invalid Numeral"
+                        # We are not allowed to subtract the current numeral, so we throw an error
+                        raise Exception("Invalid numeral: cannot subtract this numeral")
                 else:
                     # If the next number isn't greater than our current one, we simply add the value
                     returned_number += cur_numeral.value
 
 
-            previous_numeral = cur_numeral.numeral
+            previous_numerals.add(cur_numeral.numeral)
             cur_numeral_count += 1
 
         self.number = returned_number

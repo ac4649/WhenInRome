@@ -9,7 +9,11 @@ app = FastAPI()
 def convert_roman_to_number_api( numeral : str ):
 
     converter = RomanNumeralConverter(numeral = numeral)
-    returned_number = converter.convert_to_number()
+    try:
+        returned_number = converter.convert_to_number()
+    except Exception as exception:
+        # Will simply return the exception arguments
+        return { "error": exception.args}
 
     return { "number": returned_number }
 
