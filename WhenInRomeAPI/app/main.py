@@ -22,4 +22,4 @@ def convert_roman_to_number_api( number : int ):
     converter = RomanNumeralConverter(number = number)
     returned_numeral = converter.convert_to_roman()
 
-    return { "number": returned_numeral }
+    return { "numeral": returned_numeral }

@@ -5,6 +5,7 @@ import styles from '@/styles/Home.module.css'
 import { Box, Form, Text } from 'grommet'
 import { Grommet } from 'grommet'
 import RomanToNumberForm from '@/components/RomanToNumberForm'
+import NumberToRomanForm from '@/components/NumberToRomanForm'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,22 +21,21 @@ export default function Home() {
       <main className={styles.main}>
         <Box direction="row-responsive" gap="small">
           <RomanToNumberForm
-              formTitle = "Convert from Roman Numerals to Numbers:"
-              formBoxProps={{
-                pad: "small",
-                background: "white",
-                gap: "xsmall"
-              }}
-            />
-          <Box background="grey" pad="small">
-            <Text>
-              Convert from Numbers to Roman Numerals:
-            </Text>
-            <hr/>
-            <>
-              conversion box comes here
-            </>
-          </Box>
+            formTitle = "Convert from Roman Numerals to Numbers:"
+            formBoxProps={{
+              pad: "small",
+              background: "white",
+              gap: "xsmall"
+            }}
+          />
+          <NumberToRomanForm
+            formTitle = "Convert from Number to Roman Numeral:"
+            formBoxProps={{
+              pad: "small",
+              background: "white",
+              gap: "xsmall"
+            }}
+          />
         </Box>
       </main>
     </Grommet>
