@@ -1,0 +1,4 @@
+__pycache__
+# vim temporary files
+*~
+.*.sw?

@@ -7,9 +7,9 @@ The goal of this project is to create an app using NextJS and FastAPI which enab
 
 ## Infrastructure
 
-The Front End is a NextJS application which utilizes NextJS API Routes to communicate with the backend api.
+The Front End is a NextJS application which utilizes NextJS API Routes to communicate with the backend api. The code for this is in the WhenInRomeFE directory.
 
-The Back End is a FastAPI application which will have routes for the various tasks performed:
+The Back End is a FastAPI application which will have routes for the various tasks performed. The code for this is in the WhenInRomeAPI directory.
 
 Routes and there descriptions are described below:
 ### /numeral-to-number
@@ -30,10 +30,17 @@ Returns: {
 ### Running the backend
 The backend uses FastAPI, it is recommended to use a conda environment if running locally to ensure that the requirements are met.
 
+To run the backend, start by running `cd WhenInRomeAPI` to go into the 
+
 The conda environments required are defined in "conda_environment.yml"
 
 To create the conda environment with the requirements you can run:
 `conda env create -f conda_environment.yml`
+
+When the environment is created, please run:
+`uvicorn main:app --reload`
+
+This will start the backend in development mode and reload any changed to the files
 
 ## Methodology
 
