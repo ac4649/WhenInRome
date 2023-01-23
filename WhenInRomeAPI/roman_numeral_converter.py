@@ -74,3 +74,6 @@ class RomanNumeralConverter:
         print("converting the number to roman")
         if not self.number:
             raise Exception("No Number set")
+
+        # The basic conversion of a number to roman numerals is to find the largest number we can subtract by and replace with the appropriate roman numeral and do this until we reach 0
+        
