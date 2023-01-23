@@ -34,10 +34,10 @@ class RomanNumeralConverter:
                     # We need to check that we don't have 3 in a row
                     # We have traversed this numeral more than twice (at least three times) so it is invalid
                     if previous_numerals[cur_numeral.numeral] > 2:
-                        raise Exception("Invalid numeral: 4 or more repeatable numerals")
+                        raise Exception("Invalid Numeral: 4 or more repeatable numerals")
                 else:
                     # WE are not allowed to repeat the numeral
-                    raise Exception("Invalid numeral: non-repeatable numeral is repeated")
+                    raise Exception("Invalid Numeral: non-repeatable numeral is repeated")
 
             if i + 1 == len(self.numeral):
                 # We are on the last numeral
@@ -55,7 +55,7 @@ class RomanNumeralConverter:
                         returned_number -= cur_numeral.value
                     else:
                         # We are not allowed to subtract the current numeral, so we throw an error
-                        raise Exception("Invalid numeral: cannot subtract this numeral")
+                        raise Exception("Invalid Numeral: cannot subtract this numeral")
                 else:
                     # If the next number isn't greater than our current one, we simply add the value
                     returned_number += cur_numeral.value
@@ -65,6 +65,7 @@ class RomanNumeralConverter:
             else:
                 previous_numerals[cur_numeral.numeral] = 1
 
+        # We cache within the object to be able to retrieve later
         self.number = returned_number
         return returned_number
 
@@ -73,5 +74,39 @@ class RomanNumeralConverter:
         if not self.number:
             raise Exception("No Number set")
 
+        if self.number < 0:
+            raise Exception("Roman Numerals must be > 0")
+
+        remainder = self.number
         # The basic conversion of a number to roman numerals is to find the largest number we can subtract by and replace with the appropriate roman numeral and do this until we reach 0
-        
+        # Base case if we don't have a valid number we will return an exception
+        returned_numeral = ""
+
+        conversion_table = {
+            1000: "M",
+            900: "CM",
+            500: "D",
+            400: "CD",
+            100: "C",
+            90: "XC",
+            50: "L",
+            40: "XL",
+            10: "X",
+            9: "IX",
+            5: "V",
+            4: "IV",
+            1: "I"
+        }
+
+        for key in conversion_table.keys():
+            # Our key represents the current value
+            while remainder / key >= 1:
+                # While we can subtract the current value, we do so
+                returned_numeral += conversion_table[key]
+                remainder -= key            
+
+
+        # We cache within the object to be able to retrieve later
+        self.numeral = returned_numeral
+        return returned_numeral
+
