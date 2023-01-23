@@ -24,15 +24,19 @@ class RomanNumeralConverter:
             
             # We check if our current numeral is the same as our previous numeral
             if previous_numeral == cur_numeral.numeral:
-                # We check that it is greater than 2 because we have not yet incremented the count for the current numeral so it would be 3
-                if cur_numeral_count > 2:
+                # We have the same numeral, we need to check if we are allowed to repeat it
+                if cur_numeral.repeatable:
+                    # We need to check that we don't have 3 in a row
+                    if cur_numeral_count > 3:
+                        return "Invalid Numeral"
+                else:
+                    # WE are not allowed to repeat the numeral
                     return "Invalid Numeral"
             else:
-                cur_numeral_count = 0
+                cur_numeral_count = 1
 
             if i + 1 == len(self.numeral):
                 # We are on the last numeral
-                print("Last numeral, so we just add it")
                 returned_number += cur_numeral.value
             else:
                 # We need to check if the next number is greater, and if it is we need to subtract if possible
@@ -41,7 +45,6 @@ class RomanNumeralConverter:
                 except:
                     return "Invalid Numeral"
                 
-                print(next_numeral.value)
                 if cur_numeral.value < next_numeral.value:
                     if cur_numeral.subtractable:
                         # We are allowed to subtract the current numeral
