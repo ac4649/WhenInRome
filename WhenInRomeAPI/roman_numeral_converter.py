@@ -13,9 +13,10 @@ class RomanNumeralConverter:
         error = False
         
         # Let's start by going throught the numeral string and counting all the roman digits we find
-        # We then do checks for the 7 rules:
+        # We then do checks for the rules:
         # 1. We check that repeatable numerals are only present 3 times
         # 2. We check that non-repeatable numerals are not present more than once
+        # 3. We subtract subtractable numerals from the sum if we are allowed to
         for i in range(len(self.numeral)):
             # We create the roman numeral for the current character
             try:
