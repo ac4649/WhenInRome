@@ -13,7 +13,7 @@ def convert_roman_to_number_api( numeral : str ):
         returned_number = converter.convert_to_number()
     except Exception as exception:
         # Will simply return the exception arguments
-        return { "error": exception.args}
+        return { "error": exception.args[0]}
 
     return { "number": returned_number }
 
@@ -22,4 +22,4 @@ def convert_roman_to_number_api( number : int ):
     converter = RomanNumeralConverter(number = number)
     returned_numeral = converter.convert_to_roman()
 
-    return { "number": returned_numeral }
+    return { "numeral": returned_numeral }
