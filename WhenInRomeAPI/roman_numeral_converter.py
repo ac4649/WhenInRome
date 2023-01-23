@@ -2,8 +2,9 @@
 from roman_numeral import RomanNumeral
 
 class RomanNumeralConverter:
-    def __init__(self, numeral : str):
+    def __init__(self, numeral : str, number : int):
         self.numeral = numeral
+        self.number = number
     
     def convert_to_number( self ):
         returned_number = 0
@@ -59,4 +60,9 @@ class RomanNumeralConverter:
 
             previous_numeral = cur_numeral.numeral
             cur_numeral_count += 1
+
+        self.number = returned_number
         return returned_number
+
+    def convert_to_roman(self):
+        print("converting the number to roman")
