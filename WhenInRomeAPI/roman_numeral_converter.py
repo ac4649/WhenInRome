@@ -2,11 +2,16 @@
 from roman_numeral import RomanNumeral
 
 class RomanNumeralConverter:
-    def __init__(self, numeral : str, number : int):
+    def __init__(self, numeral : str = None, number : int = None):
         self.numeral = numeral
         self.number = number
     
     def convert_to_number( self ):
+
+        if not self.numeral:
+            raise Exception("No Numeral set")
+
+
         returned_number = 0
         cur_numeral_count = 0
         previous_numeral = ""
@@ -67,3 +72,5 @@ class RomanNumeralConverter:
 
     def convert_to_roman(self):
         print("converting the number to roman")
+        if not self.number:
+            raise Exception("No Number set")
