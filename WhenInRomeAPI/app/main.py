@@ -1,7 +1,7 @@
 from typing import Union
 from fastapi import FastAPI
 
-from roman_numeral_converter import RomanNumeralConverter
+from app.roman_numeral_converter import RomanNumeralConverter
 
 app = FastAPI()
 

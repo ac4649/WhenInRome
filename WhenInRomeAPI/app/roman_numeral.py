@@ -19,7 +19,7 @@ class RomanNumeral:
 
         # Returns false if we can't build the valid numeral so we throw an exception
         if not numeral in RomanNumeral.valid_numerals:
-            raise Exception("Invalid numeral")
+            raise Exception("Invalid Numeral")
 
         self.numeral = numeral
         self.value = RomanNumeral.valid_numerals[self.numeral][0]
