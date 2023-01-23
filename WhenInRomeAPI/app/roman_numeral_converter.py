@@ -21,7 +21,7 @@ class RomanNumeralConverter:
         # 2. We check that non-repeatable numerals are not present more than once
         # 3. We subtract subtractable numerals from the sum if we are allowed to
         for i in range(len(self.numeral)):
-            print(previous_numerals)
+
             # We create the roman numeral for the current character
             try:
                 cur_numeral = RomanNumeral(self.numeral[i])
@@ -69,7 +69,7 @@ class RomanNumeralConverter:
         return returned_number
 
     def convert_to_roman(self):
-        print("converting the number to roman")
+
         if not self.number:
             raise Exception("No Number set")
 
