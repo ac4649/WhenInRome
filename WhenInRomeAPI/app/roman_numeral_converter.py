@@ -1,5 +1,5 @@
 # We create a RomanNumeralConverter class which will enable the conversion functionality
-from roman_numeral import RomanNumeral
+from app.roman_numeral import RomanNumeral
 
 class RomanNumeralConverter:
     def __init__(self, numeral : str = None, number : int = None):
