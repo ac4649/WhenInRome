@@ -75,14 +75,14 @@ class TestRomanNumeral:
 
     def test_can_be_subtracted_from(self):
         valid_subtraction = RomanNumeral("X")
-        assert valid_subtraction.canBeSubtractedFrom() == True
+        assert valid_subtraction.can_be_subtracted_from() == True
         valid_subtraction.times_found += 2
-        assert valid_subtraction.canBeSubtractedFrom() == True
+        assert valid_subtraction.can_be_subtracted_from() == True
 
 
         invalid_subtraction = RomanNumeral("V")
-        assert invalid_subtraction.canBeSubtractedFrom() == True
+        assert invalid_subtraction.can_be_subtracted_from() == True
 
         # If we found the invalid subtraction once we
         invalid_subtraction.times_found += 1
-        assert invalid_subtraction.canBeSubtractedFrom() == False
+        assert invalid_subtraction.can_be_subtracted_from() == False
