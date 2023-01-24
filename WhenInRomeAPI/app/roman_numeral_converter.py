@@ -65,6 +65,22 @@ class RomanNumeralConverter:
         i = 0
 
         while i < len(self.numeral):
+            print("-")
+            print(self.number)
+            print(largest_new_value)
+            # print(type(largest_new_value))
+            # print(largest_new_value <= 0)
+            print("------")
+            if largest_new_value:
+                print("-----")
+                print(largest_new_value == 0)
+                print(largest_new_value <= 0)
+                print("2", largest_new_value)
+                if largest_new_value <= 0:
+                    # Can't add anything more, so i raise
+                    print("raising")
+                    raise Exception("Invalid Numeral: Remaining sequence is larger")
+            # CLXIXII
             # We create the roman numeral for the current character
             # We know that the numerals can have their value multiplied by 1000 if they have a bar on top,
             # We represent this bar on top with a "_" symbol before the character
@@ -86,7 +102,7 @@ class RomanNumeralConverter:
                 cur_numeral.addToSequence()
                 self.latest_full_sequence_numeral = cur_numeral.numeral
                 # Every time we end a sequence we update the largest_new_value 
-                largest_new_value = cur_numeral.value
+                largest_new_value = cur_numeral.maxRestSequenceValue()
                 self.number += cur_numeral.sequence_sum
             else:
 
@@ -114,7 +130,7 @@ class RomanNumeralConverter:
 
                     # For a subraction we cannot go more than 1 bellow the largest value
                     if largest_new_value:
-                        if largest_new_value - 1 < subtraction_numeral.value:
+                        if largest_new_value < subtraction_numeral.value:
                             # We are not allowed to subtract the current numeral, so we throw an error
                             raise Exception("Invalid Numeral: Remaining sequence is larger")
 
@@ -125,13 +141,11 @@ class RomanNumeralConverter:
                     
                     # Because we are ending a sequence, we add to the number
                     self.number += subtraction_numeral.sequence_sum
-                    if largest_new_value:
-                        # When we add a subtraction to the sequence, we also offset the maximum we can add by the sequence sum
-                        largest_new_value = largest_new_value - subtraction_numeral.sequence_sum - 1
-                    else:
-                        # If we didn't previously have a largest new value, our current sequence sum becomes it
-                        largest_new_value = subtraction_numeral.sequence_sum - 1
-                    i = new_i
+
+                    # When we add a subtraction to the sequence, we also offset the maximum we can add by the sequence sum
+                    largest_new_value = subtraction_numeral.maxRestSequenceValue()
+
+                    i = new_i   
                     
                 else:
                     # We check if we can add the current numeral to the string
@@ -154,7 +168,7 @@ class RomanNumeralConverter:
 
                         self.latest_full_sequence_numeral = cur_numeral.numeral
                         # Every time we end a sequence we update the largest_new_value 
-                        largest_new_value = cur_numeral.value
+                        largest_new_value = cur_numeral.maxRestSequenceValue()
                         self.number += cur_numeral.sequence_sum
 
             i += 1
