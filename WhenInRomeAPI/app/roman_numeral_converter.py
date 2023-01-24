@@ -1,9 +1,14 @@
 # We create a RomanNumeralConverter class which will enable the conversion functionality
 from app.roman_numeral import RomanNumeral
+import re
 
 class RomanNumeralConverter:
     def __init__(self, numeral : str = None, number : int = None):
-        self.numeral = numeral
+        # We want to pre-process the numeral by removing any whitespace chars from it
+        if numeral:
+            self.numeral = re.sub(r"\s+", "", numeral)
+        else:
+            self.numeral = numeral
         self.number = number
     
     def convert_to_number( self ):
