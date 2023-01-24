@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <Grommet full>
+    <>
       <Head>
         <title>Roman Numeral Conversion App</title>
         <meta name="description" content="Convert Roman Numerals to Numbers and vice-versa" />
@@ -20,7 +20,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Box gap="small">
+        <Box gap="small" fill align="center">
           <Box direction="row-responsive" gap="small" fill>
             <RomanToNumberForm
               formTitle = "Convert from Roman Numerals to Numbers"
@@ -28,7 +28,8 @@ export default function Home() {
                 pad: "small",
                 background: "white",
                 gap: "xsmall",
-                border: "all"
+                border: "all",
+                fill: true
               }}
             />
             <NumberToRomanForm
@@ -37,23 +38,25 @@ export default function Home() {
                 pad: "small",
                 background: "white",
                 gap: "xsmall",
-                border: "all"
+                border: "all",
+                fill: true
               }}
             />
           </Box>
-          <Box direction="row" fill>
+          <Box direction="row" fill  align="center">
             <RomanAdditionForm
               formTitle = "Add Roman Numbers"
               formBoxProps={{
                 pad: "small",
                 background: "white",
                 gap: "xsmall",
-                border: "all"
+                border: "all",
+                fill: true
               }}
             />
           </Box>
         </Box>
       </main>
-    </Grommet>
+    </>
   )
 }

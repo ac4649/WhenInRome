@@ -42,7 +42,7 @@ const NumberToRomanForm = ( props : IRomanToNumberForm ) => {
     return (
         <Box {...props.formBoxProps} >
             <Box align="center">
-                <Text weight="bold"> 
+                <Text weight="bold" size="large"> 
                     { props.formTitle }
                 </Text>
             </Box>
