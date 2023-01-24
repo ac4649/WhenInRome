@@ -97,8 +97,9 @@ class RomanNumeralConverter:
             else:
 
                 try:
-                    # We find the next numeral by sending in new_i + 1 as the position because new_i is the actual position of the character not the "_"
-                    next_numeral, new_i = self.get_numeral_starting_at_i(self.numeral, new_i+1)
+                    # We find the next numeral by sending in new_i + 1 as the position because new_i is the actual position of the character not the "_"\
+                    # We save the new position of numeral i to update only if we have a subtraction that is valid
+                    next_numeral, next_numeral_i = self.get_numeral_starting_at_i(self.numeral, new_i+1)
                 except Exception as exception:
                     raise exception
                 
@@ -135,7 +136,7 @@ class RomanNumeralConverter:
                     # When we add a subtraction to the sequence, we also offset the maximum we can add by the sequence sum
                     largest_new_value = subtraction_numeral.maxRestSequenceValue()
 
-                    i = new_i   
+                    i = next_numeral_i   
                     
                 else:
                     # We check if we can add the current numeral to the string
@@ -161,6 +162,7 @@ class RomanNumeralConverter:
                         largest_new_value = cur_numeral.maxRestSequenceValue()
                         self.number += cur_numeral.sequence_sum
 
+                    i = new_i 
             i += 1
         return self.number
 

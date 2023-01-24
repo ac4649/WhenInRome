@@ -17,6 +17,9 @@ class TestRomanNumeralConverter:
         assert RomanNumeralConverter(numeral="IV").convert_to_number() == 4
         assert RomanNumeralConverter(numeral="IX").convert_to_number() == 9
 
+    def test_convert_to_number_with_bar(self):
+        assert RomanNumeralConverter(numeral="_XXXI").convert_to_number() == 10021
+
     def test_convert_to_number_invalid_ending(self):
         with pytest.raises(Exception, match="Invalid Numeral: Remaining sequence is larger"):
             RomanNumeralConverter(numeral="CLXIXII").convert_to_number()
