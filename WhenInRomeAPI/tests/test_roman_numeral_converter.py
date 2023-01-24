@@ -9,18 +9,38 @@ class TestRomanNumeralConverter:
         assert RomanNumeralConverter(numeral="X").convert_to_number() == 10
         assert RomanNumeralConverter(numeral="L").convert_to_number() == 50
 
-    def test_convert_to_number_cannot_subtract_properly(self):
+    def test_convert_to_number_single_subtractions(self):
+        assert RomanNumeralConverter(numeral="IV").convert_to_number() == 4
+        assert RomanNumeralConverter(numeral="IX").convert_to_number() == 9
+        assert RomanNumeralConverter(numeral="IV").convert_to_number() == 4
+        assert RomanNumeralConverter(numeral="IX").convert_to_number() == 9
+        assert RomanNumeralConverter(numeral="IV").convert_to_number() == 4
+        assert RomanNumeralConverter(numeral="IX").convert_to_number() == 9
+
+    def test_convert_to_number_invalid_ending(self):
+        with pytest.raises(Exception, match="Invalid Numeral: Remaining sequence is larger"):
+            RomanNumeralConverter(numeral="CLXIXII").convert_to_number()
+
+        with pytest.raises(Exception, match="Invalid Numeral: Remaining sequence is larger"):
+            RomanNumeralConverter(numeral="CDMLX").convert_to_number()
+
+    def test_convert_to_number_cannot_be_subtracted(self):
         with pytest.raises(Exception, match="Invalid Numeral: Cannot subtract properly"):
             RomanNumeralConverter(numeral="VIV").convert_to_number()
 
+
     def test_convert_to_number_cannot_be_added(self):
-        with pytest.raises(Exception, match="Invalid Numeral: Cannot be added properly"):
+        with pytest.raises(Exception, match="Invalid Numeral: I Cannot be added at position 3"):
             RomanNumeralConverter(numeral="IIII").convert_to_number()
+
+        with pytest.raises(Exception, match="Invalid Numeral: V Cannot be added at position 1"):
             RomanNumeralConverter(numeral="VV").convert_to_number()
+
+        with pytest.raises(Exception, match="Invalid Numeral: X Cannot be added at position 4"):
             RomanNumeralConverter(numeral="XIXXX").convert_to_number()
-        
+
     
-    def test_convert_to_number_edge_cases_(self):
+    def test_convert_to_number_edge_cases(self):
         assert RomanNumeralConverter(numeral="CDLXXXIX").convert_to_number() == 489
 
     def test_convert_to_higher_numberes(self):
