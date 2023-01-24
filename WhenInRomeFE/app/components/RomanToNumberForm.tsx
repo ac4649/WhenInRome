@@ -50,7 +50,7 @@ const RomanToNumberForm = ( props : IRomanToNumberForm ) => {
                 value={value}
             >
                 <Box gap="small">
-                    <FormField name="numeral" label="Roman Numeral" help="Add a underscore (_) before letter to add a bar to it.">
+                    <FormField name="numeral" label="Roman Numeral (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000">
                         <TextInput 
                             name="numeral"
                         />
