@@ -95,6 +95,7 @@ class RomanNumeralConverter:
             if new_i + 1 == len(self.numeral):
                 # We are at the last numeral, no need to check the next one, we simply do the operation of checking and adding to the sequence
                 self.check_add_update_number_and_new_largest_value(cur_numeral, new_i)
+                i = new_i
             else:
 
                 try:

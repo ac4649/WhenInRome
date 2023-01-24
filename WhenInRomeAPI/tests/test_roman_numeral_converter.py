@@ -18,6 +18,8 @@ class TestRomanNumeralConverter:
         assert RomanNumeralConverter(numeral="IX").convert_to_number() == 9
 
     def test_convert_to_number_with_bar(self):
+        assert RomanNumeralConverter(numeral="_X").convert_to_number() == 10000
+        assert RomanNumeralConverter(numeral="_V").convert_to_number() == 5000
         assert RomanNumeralConverter(numeral="_XXXI").convert_to_number() == 10021
 
     def test_convert_to_number_invalid_ending(self):
