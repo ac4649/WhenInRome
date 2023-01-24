@@ -38,11 +38,11 @@ The front end will parse the "_" and display the text-decoration: overline inste
 ## Installation and Running
 
 ### Running the backend
-The backend uses FastAPI, it is recommended to use a conda environment if running locally to ensure that the requirements are met.
+The backend uses FastAPI, it is recommended to use a conda environment if running locally to ensure that the requirements are met. Miniforge is recommended (https://github.com/conda-forge/miniforge)
 
-To run the backend, start by running `cd WhenInRomeAPI` to go into the 
+To run the backend, start by running `cd WhenInRomeAPI` to go into the backend api directory
 
-The conda environments required are defined in "conda_environment.yml"
+The conda environment dependencies required are defined in "conda_environment.yml"
 
 To create the conda environment with the requirements you can run:
 `conda env create -f conda_environment.yml -n WhenInRomeEnv`
@@ -51,13 +51,16 @@ activate the env:
 `conda activate WhenInRomeEnv`
 
 When the environment is created, please run:
-`uvicorn main:app --reload`
+`uvicorn app.main:app --reload`
+
+To run the unit tests run:
+`pytest`
 
 This will start the backend in development mode and reload any changed to the files
 
 ### Running the Front End
 
-The front end is a NextJS application which was built using yarn.
+The front end is a NextJS application which was built using yarn (https://yarnpkg.com).
 In order to run the front end, use Yarn
 
 Create a ".env.local" file (sample.env.local file for reference) containing the Backend url to which the Front end should connect
