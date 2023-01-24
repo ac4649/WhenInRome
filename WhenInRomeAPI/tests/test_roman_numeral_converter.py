@@ -21,6 +21,9 @@ class TestRomanNumeralConverter:
         with pytest.raises(Exception, match="Invalid Numeral: Remaining sequence is larger"):
             RomanNumeralConverter(numeral="CLXIXII").convert_to_number()
 
+        with pytest.raises(Exception, match="Invalid Numeral: Remaining sequence is larger"):
+            RomanNumeralConverter(numeral="CDMLX").convert_to_number()
+
     def test_convert_to_number_cannot_be_subtracted(self):
         with pytest.raises(Exception, match="Invalid Numeral: Cannot subtract properly"):
             RomanNumeralConverter(numeral="VIV").convert_to_number()
