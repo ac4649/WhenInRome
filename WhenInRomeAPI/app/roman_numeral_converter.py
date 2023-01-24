@@ -76,7 +76,7 @@ class RomanNumeralConverter:
             if new_i + 1 == len(self.numeral):
                 # We are on the last numeral, so no need to check for anythin after it, just check for whether we can safely add it
                 if not cur_numeral.canBeAdded():
-                    raise Exception("Invalid Numeral: Cannot be added properly")
+                    raise Exception(f'Invalid Numeral: {cur_numeral.numeral} Cannot be added at position {new_i}')
 
                 if largest_new_value < cur_numeral.sequence_sum:
                     # We are not allowed to subtract the current numeral, so we throw an error
@@ -110,8 +110,7 @@ class RomanNumeralConverter:
                     # By definition if we have the numeral in the system, it can be subtracted from, we just need to check if we have already done it
                     if not subtraction_numeral.canBeAdded():
                         raise Exception("Invalid Numeral: Cannot subtract properly")
-                    print(largest_new_value)
-                    print(subtraction_numeral.value)
+
                     # For a subraction we cannot go more than 1 bellow the largest value
                     if largest_new_value - 1 < subtraction_numeral.value:
                         # We are not allowed to subtract the current numeral, so we throw an error
@@ -126,13 +125,12 @@ class RomanNumeralConverter:
                     self.number += subtraction_numeral.sequence_sum
                     # When we add a subtraction to the sequence, we also offset the maximum we can add by the sequence sum
                     largest_new_value = largest_new_value - subtraction_numeral.sequence_sum - 1
-                    print(self.number)
                     i = new_i
                     
                 else:
                     # We check if we can add the current numeral to the string
                     if not cur_numeral.canBeAdded():
-                        raise Exception("Invalid Numeral: Cannot be added properly")
+                        raise Exception(f'Invalid Numeral: {cur_numeral.numeral} Cannot be added at position {new_i}')
                     
                     # If the next number isn't greater than our current one, we simply add the value of the current one
                     # We do it here because if the next number has a greater value, neither really counts towards the total in the sequence
@@ -141,7 +139,6 @@ class RomanNumeralConverter:
 
                     # If our next numeral is not the same (but it is smaller) we end our sequence and update the tracked latest sequence numeral
                     if next_numeral.numeral != cur_numeral.numeral:
-                        print("new sequence, testing if we can add")
                         # We check that we can add this new sequence
                         if largest_new_value < cur_numeral.sequence_sum:
                             # We are not allowed to subtract the current numeral, so we throw an error
@@ -153,17 +150,7 @@ class RomanNumeralConverter:
                         largest_new_value = cur_numeral.value
                         self.number += cur_numeral.sequence_sum
 
-            # If we have a full sequence numeral previously, we need to check the value of the new sequence
-            # print(cur_numeral.sequence_sum)
-            # if self.latest_full_sequence_numeral in self.encoutered_numerals:
-            #     previous_sequence_numeral = self.encoutered_numerals[self.latest_full_sequence_numeral]
-            #     if cur_numeral.sequence_sum >= self.encoutered_numerals[self.latest_full_sequence_numeral].value:
-            #         raise Exception("Invalid Numeral: larger value to the right of a smaller value")
-
             i += 1
-
-        print(self.numeral)
-        print(self.number)
         return self.number
 
     def convert_to_roman(self):
