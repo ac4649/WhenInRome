@@ -4,14 +4,22 @@ import react from "react"
 // We deal with converting the underscores to overlines here
 interface IShowUpperBars {
     title ? : string,
+    border ? : any,
+    bold_title ? : boolean
     value: string
 }
 
 const ShowUpperBars = ( props : IShowUpperBars) => {
     let hasUpperBar = false
     return (
-        <Box border="all" pad="small" gap="small">
-            <Text>{ props.title ? props.title : "Viniculum Notation Preview:" }</Text>
+        <Box border={ props.border } pad="small" gap="small">
+            {
+                props.bold_title ? (
+                    <Text weight="bold">{ props.title ? props.title : "Viniculum Notation Preview:" }</Text>
+                ) : (
+                    <Text>{ props.title ? props.title : "Viniculum Notation Preview:" }</Text>
+                )
+            }
             <Box direction="row">
                 {
                     props.value.split("").map(

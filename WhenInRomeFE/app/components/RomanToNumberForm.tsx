@@ -55,6 +55,7 @@ const RomanToNumberForm = ( props : IRomanToNumberForm ) => {
                     <FormField name="numeral" label="Roman Numeral (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
                         <TextInput 
                             name="numeral"
+                            focusIndicator={true}
                         />
                     </FormField>
                     <ShowUpperBars value={value.numeral} />
@@ -64,7 +65,7 @@ const RomanToNumberForm = ( props : IRomanToNumberForm ) => {
             <Box align="center">
                 {
                     value.number && (
-                        <Box direction="row" gap="small">
+                        <Box border={{size:"medium"}} pad="small" gap="small" fill>
                             <Text weight="bold">
                                 Result:
                             </Text>

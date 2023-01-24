@@ -59,6 +59,7 @@ const RomanAdditionForm = ( props : IRomanAdditionForm ) => {
                             <FormField name="numeral1" label="Roman Numeral 1 (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
                                 <TextInput 
                                     name="numeral1"
+                                    focusIndicator={true}
                                 />
                             </FormField>
                             <ShowUpperBars value={value.numeral1} />
@@ -67,6 +68,7 @@ const RomanAdditionForm = ( props : IRomanAdditionForm ) => {
                             <FormField name="numeral2" label="Roman Numeral 2 (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
                                 <TextInput 
                                     name="numeral2"
+                                    focusIndicator={true}
                                 />
                             </FormField>
                             <ShowUpperBars value={value.numeral2} />
@@ -79,7 +81,12 @@ const RomanAdditionForm = ( props : IRomanAdditionForm ) => {
             {
                 value.sum && (
                     <Box>
-                        <ShowUpperBars title="Result:" value={value.sum} />
+                        <ShowUpperBars 
+                            title="Result:"
+                            bold_title={true}
+                            value={value.sum}
+                            border={{size:"medium"}}
+                        />
                     </Box>
                 )
             }
