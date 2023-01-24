@@ -97,7 +97,7 @@ class RomanNumeralConverter:
                 
                 # We check if we are allowed to subtract the curent numeral from the next one
                 if cur_numeral.value < next_numeral.value:
-                    if not RomanNumeral.is_valid_subtraction(cur_numeral.numeral, next_numeral.numeral):
+                    if not RomanNumeral.is_valid_subtraction(cur_numeral.numeral, next_numeral.numeral) or not next_numeral.canBeSubtractedFrom():
                         raise Exception("Invalid Numeral: Cannot subtract properly")
 
                     # We attempt to get a new subtraction numeral which we can target
