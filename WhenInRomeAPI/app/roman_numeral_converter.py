@@ -73,9 +73,6 @@ class RomanNumeralConverter:
             except Exception as exception:
                 raise exception
 
-            print(cur_numeral.numeral)
-            print(cur_numeral.value)
-            print(new_i)
             if largest_new_value == 0:
                 # Can't add anything more, so i raise
                 raise Exception("Invalid Numeral: Remaining sequence is larger")
