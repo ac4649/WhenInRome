@@ -6,6 +6,7 @@ import { Box, Form, Text } from 'grommet'
 import { Grommet } from 'grommet'
 import RomanToNumberForm from '@/components/RomanToNumberForm'
 import NumberToRomanForm from '@/components/NumberToRomanForm'
+import RomanAdditionForm from '@/components/RomanAdditionForm'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,25 +20,38 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Box direction="row-responsive" gap="small">
-          <RomanToNumberForm
-            formTitle = "Convert from Roman Numerals to Numbers:"
-            formBoxProps={{
-              pad: "small",
-              background: "white",
-              gap: "xsmall",
-              border: "all"
-            }}
-          />
-          <NumberToRomanForm
-            formTitle = "Convert from Number to Roman Numeral:"
-            formBoxProps={{
-              pad: "small",
-              background: "white",
-              gap: "xsmall",
-              border: "all"
-            }}
-          />
+        <Box gap="small">
+          <Box direction="row-responsive" gap="small">
+            <RomanToNumberForm
+              formTitle = "Convert from Roman Numerals to Numbers:"
+              formBoxProps={{
+                pad: "small",
+                background: "white",
+                gap: "xsmall",
+                border: "all"
+              }}
+            />
+            <NumberToRomanForm
+              formTitle = "Convert from Number to Roman Numeral:"
+              formBoxProps={{
+                pad: "small",
+                background: "white",
+                gap: "xsmall",
+                border: "all"
+              }}
+            />
+          </Box>
+          <Box direction="row" fill>
+            <RomanAdditionForm
+              formTitle = "Add Roman Numbers:"
+              formBoxProps={{
+                pad: "small",
+                background: "white",
+                gap: "xsmall",
+                border: "all"
+              }}
+            />
+          </Box>
         </Box>
       </main>
     </Grommet>

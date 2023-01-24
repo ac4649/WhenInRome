@@ -43,4 +43,4 @@ def roman_addition( numeral1 : str = None, numeral2 : str = None):
         return { "error": exception.args[0] }
 
 
-    return { "numeral": returned_numeral }
+    return { "sum": returned_numeral }
