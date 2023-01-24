@@ -20,10 +20,7 @@ class RomanNumeralConverter:
 
         # We keep track of the numerals we have encountered as we convert
         self.encoutered_numerals = {}
-
-        # Latest Full Sequence Numeral
-        # We keep track of the latest sequence we have captured, to make sure that our sum is consistent
-        self.latest_full_sequence_numeral = ""
+        self.largest_new_value = None
 
     # We find a numeral starting at position i
     def get_numeral_starting_at_i(self, string : str, i : int, number_chars=1):
@@ -46,6 +43,24 @@ class RomanNumeralConverter:
         # I now return the new index - 1 to get the location of the last char
         return self.encoutered_numerals[numeral_label], new_index - 1
     
+    def check_add_update_number_and_new_largest_value( self, new_numeral : RomanNumeral, position : int ):
+        if not new_numeral.canBeAdded():
+            raise Exception(f'Invalid Numeral: {new_numeral.numeral} Cannot be added at position {position}')
+        
+        # We check if our new numeral is too large
+        if self.largest_new_value:
+            if self.largest_new_value < new_numeral.value:
+                raise Exception("Invalid Numeral: Remaining sequence is larger")
+
+        # And add it to the sequence
+        new_numeral.addToSequence()
+
+        # Every time we end a sequence we update the largest_new_value and the number
+        self.number += new_numeral.value
+        self.largest_new_value = new_numeral.maxRestSequenceValue()
+        # We return the largetst sequence value for next itteration
+        return True
+
     def convert_to_number( self ):
 
         if not self.numeral:
@@ -55,7 +70,7 @@ class RomanNumeralConverter:
         self.number = 0
 
         # We keep track of the largest value we added
-        largest_new_value = None
+        self.largest_new_value = None
 
         # Let's start by going throught the numeral string and counting all the roman digits we find
         # We then do checks for the rules:
@@ -73,27 +88,13 @@ class RomanNumeralConverter:
             except Exception as exception:
                 raise exception
 
-            if largest_new_value == 0:
+            if self.largest_new_value == 0:
                 # Can't add anything more, so i raise
                 raise Exception("Invalid Numeral: Remaining sequence is larger")
                 
             if new_i + 1 == len(self.numeral):
-                # We are on the last numeral, so no need to check for anythin after it, just check for whether we can safely add it
-                if not cur_numeral.canBeAdded():
-                    raise Exception(f'Invalid Numeral: {cur_numeral.numeral} Cannot be added at position {new_i}')
-                
-                # We attempt to add to the sequence, and check if we can with the value
-                cur_numeral.addToSequence()
-
-                if largest_new_value:
-                    if largest_new_value < cur_numeral.sequence_sum:
-                        # We are not allowed to subtract the current numeral, so we throw an error
-                        raise Exception("Invalid Numeral: Remaining sequence is larger")
-
-                self.latest_full_sequence_numeral = cur_numeral.numeral
-                # Every time we end a sequence we update the largest_new_value 
-                largest_new_value = cur_numeral.maxRestSequenceValue()
-                self.number += cur_numeral.sequence_sum
+                # We are at the last numeral, no need to check the next one, we simply do the operation of checking and adding to the sequence
+                self.check_add_update_number_and_new_largest_value(cur_numeral, new_i)
             else:
 
                 try:
@@ -103,66 +104,31 @@ class RomanNumeralConverter:
                 except Exception as exception:
                     raise exception
                 
-                # We check if we are allowed to subtract the curent numeral from the next one
-                if cur_numeral.value < next_numeral.value:
-                    if not RomanNumeral.is_valid_subtraction(cur_numeral.numeral, next_numeral.numeral) or not next_numeral.canBeSubtractedFrom():
+                # We check if we are allowed to subtract the curent numeral from the next one to deal with both as a single numeral
+                if RomanNumeral.is_valid_subtraction(cur_numeral.numeral, next_numeral.numeral):
+                    # We have a valid subtraction so we need to take it into account
+                    # We first check if we can subtract from the next_numeral
+                    if not next_numeral.canBeSubtractedFrom():
                         raise Exception("Invalid Numeral: Cannot subtract properly")
 
-                    # We attempt to get a new subtraction numeral which we can target
+                    # If we are allowed to subtract, we generate the new combined numeral
                     try:
                         # I am getting 2 characters here
                         subtraction_numeral, new_i = self.get_numeral_starting_at_i(self.numeral, i, 2)
                     except Exception as exception:
                         raise exception
 
-                    # By definition if we have the numeral in the system, it can be subtracted from, we just need to check if we have already done it
-                    if not subtraction_numeral.canBeAdded():
-                        raise Exception("Invalid Numeral: Cannot subtract properly")
-
-                    # We are starting a new sequence here so we check if we are allowed to have the sum of the sequence in the 
-                    subtraction_numeral.addToSequence()
-
-                    # We check that we can actually add this subtraction
-                    if largest_new_value:
-                        if largest_new_value < subtraction_numeral.sequence_sum:
-                            # We are not allowed to subtract the current numeral, so we throw an error
-                            raise Exception("Invalid Numeral: Remaining sequence is larger")
-
+                    # We do the standard updating for the numeral and adding to the value
+                    self.check_add_update_number_and_new_largest_value(subtraction_numeral, new_i)
+                    # Because we have a subtraction, we add the fact that we found a subtraction to the next element
                     next_numeral.found_subtracted_element = True                    
-                    
-                    # Because we are ending a sequence, we add to the number
-                    self.number += subtraction_numeral.sequence_sum
-
-                    # When we add a subtraction to the sequence, we also offset the maximum we can add by the sequence sum
-                    largest_new_value = subtraction_numeral.maxRestSequenceValue()
-
                     i = next_numeral_i   
                     
                 else:
-                    # We check if we can add the current numeral to the string
-                    if not cur_numeral.canBeAdded():
-                        raise Exception(f'Invalid Numeral: {cur_numeral.numeral} Cannot be added at position {new_i}')
-                    
-                    # If the next number isn't greater than our current one, we simply add the value of the current one
-                    # We do it here because if the next number has a greater value, neither really counts towards the total in the sequence
-                    # We however update the sequence sum for the current numeral by adding it
-                    cur_numeral.addToSequence()
+                    # We don't have a valid subtraction so we continue just dealing with the current numeral
+                    self.check_add_update_number_and_new_largest_value(cur_numeral, new_i)
 
-                    # If our next numeral is not the same (but it is smaller) we end our sequence and update the tracked latest sequence numeral
-                    if next_numeral.numeral != cur_numeral.numeral:
-                        # We check that we can add this new sequence
-                        if largest_new_value:
-                            if largest_new_value < cur_numeral.sequence_sum:
-                                # We are not allowed to subtract the current numeral, so we throw an error
-                                raise Exception("Invalid Numeral: Remaining sequence is larger")
-
-
-                        self.latest_full_sequence_numeral = cur_numeral.numeral
-                        # Every time we end a sequence we update the largest_new_value 
-                        largest_new_value = cur_numeral.maxRestSequenceValue()
-                        self.number += cur_numeral.sequence_sum
-
-                    i = new_i 
+                    i = new_i
             i += 1
         return self.number
 
