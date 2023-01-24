@@ -11,7 +11,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
-  axios.get("http://127.0.0.1:8000/numeral-to-number?numeral=" + req.query.numeral).then(
+  axios.get(process.env["BACKEND_URL"] + "/numeral-to-number?numeral=" + req.query.numeral).then(
       (response : AxiosResponse) => {
 
           if (response.data.number) {

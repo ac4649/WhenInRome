@@ -60,6 +60,8 @@ This will start the backend in development mode and reload any changed to the fi
 The front end is a NextJS application which was built using yarn.
 In order to run the front end, use Yarn
 
+Create a ".env.local" file (sample.env.local file for reference) containing the Backend url to which the Front end should connect
+
 then do `yarn install` from the "WhenInRomeFE" directory
 
 then to run the application `yarn dev` to run in development mode
