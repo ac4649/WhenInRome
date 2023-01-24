@@ -61,11 +61,15 @@ activate the env:
 When the environment is created, please run:
 `uvicorn app.main:app --reload`
 
+This will start the backend in development mode and reload any changed to the files
+
 To run the unit tests run:
 
 `pytest`
 
-This will start the backend in development mode and reload any changed to the files
+To run in production mode:
+
+`uvicorn app.main:app`
 
 ### Running the Front End
 
@@ -74,6 +78,16 @@ In order to run the front end, use Yarn
 
 Create a ".env.local" file (sample.env.local file for reference) containing the Backend url to which the Front end should connect
 
+go to the app directory by:
+
+`cd WhenInRomeAPI/app`
+
+
 then do `yarn install` from the "WhenInRomeFE" directory
 
 then to run the application `yarn dev` to run in development mode
+
+to run in production mode
+
+run `yarn next build`
+then `yarn start`
