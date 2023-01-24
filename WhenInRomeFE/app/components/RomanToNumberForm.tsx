@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { Box, BoxProps, Button, Form, FormExtendedEvent, FormField, Text, TextInput } from "grommet"
 import React from "react"
+import ShowUpperBars from "./ShowUpperBars";
 const axios = require('axios');
 
 interface IRomanToNumberForm {
@@ -54,6 +55,11 @@ const RomanToNumberForm = ( props : IRomanToNumberForm ) => {
                             name="numeral"
                         />
                     </FormField>
+                    <Box border="all" pad="small">
+                        Preview of the text with bars on top
+                        &nbsp;
+                        <ShowUpperBars value={value.numeral} />
+                    </Box>
                     <Button primary type="submit" label="Convert!"/>
                 </Box>
             </Form>

@@ -9,17 +9,19 @@ class TestRomanNumeralConverter:
         assert RomanNumeralConverter(numeral="X").convert_to_number() == 10
         assert RomanNumeralConverter(numeral="L").convert_to_number() == 50
 
-
-    def test_convert_to_number_duplicate_entries(self):
-        with pytest.raises(Exception, match="Invalid Numeral: non-repeatable numeral is repeated"):
+    def test_convert_to_number_cannot_subtract_properly(self):
+        with pytest.raises(Exception, match="Invalid Numeral: Cannot subtract properly"):
             RomanNumeralConverter(numeral="VIV").convert_to_number()
 
-        with pytest.raises(Exception, match="Invalid Numeral: 4 or more repeatable numerals"):
+    def test_convert_to_number_cannot_be_added(self):
+        with pytest.raises(Exception, match="Invalid Numeral: Cannot be added properly"):
             RomanNumeralConverter(numeral="IIII").convert_to_number()
-        
-        with pytest.raises(Exception, match="Invalid Numeral: 4 or more repeatable numerals"):
+            RomanNumeralConverter(numeral="VV").convert_to_number()
             RomanNumeralConverter(numeral="XIXXX").convert_to_number()
+        
     
+    def test_convert_to_number_edge_cases_(self):
+        assert RomanNumeralConverter(numeral="CDLXXXIX").convert_to_number() == 489
 
     def test_convert_to_higher_numberes(self):
         assert RomanNumeralConverter(numeral="_I_V").convert_to_number() == 4000

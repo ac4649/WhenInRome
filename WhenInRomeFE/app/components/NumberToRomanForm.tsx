@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import { Box, BoxProps, Button, Form, FormExtendedEvent, FormField, Text, TextInput } from "grommet"
 import React from "react"
+import ShowUpperBars from "./ShowUpperBars";
 const axios = require('axios');
 
 interface IRomanToNumberForm {
@@ -15,42 +16,6 @@ interface IFormValue {
 }
 
 const NumberToRomanForm = ( props : IRomanToNumberForm ) => {
-
-    // We deal with converting the underscores to overlines here
-    const ShowUpperBars = () => {
-        let hasUpperBar = false
-        return (
-            <Box direction="row">
-                {
-                    value.numeral?.split("").map(
-                        (cur_value, index) => {
-                            if (cur_value == "_") {
-                                hasUpperBar = true
-                                return null
-                            }
-
-                            if (hasUpperBar) {
-                                hasUpperBar = false
-                                return (
-                                    <Text key={index} style={{textDecoration: "overline"}}>
-                                        {cur_value}
-                                    </Text>
-                                )
-                            } else {
-                                return (
-                                    <Text key={index}>
-                                        {cur_value}
-                                    </Text>
-                                )
-                            } 
-                    
-                        }
-                    )
-                }
-            </Box>
-        )
-
-    }
 
     const [value, setValue] = React.useState<IFormValue>({})
 
@@ -98,7 +63,7 @@ const NumberToRomanForm = ( props : IRomanToNumberForm ) => {
             {
                 value.numeral && (
                     <Box>
-                        <ShowUpperBars />
+                        <ShowUpperBars value={value.numeral} />
                     </Box>
                 )
             }
