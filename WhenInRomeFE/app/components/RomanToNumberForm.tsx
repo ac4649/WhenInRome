@@ -41,9 +41,11 @@ const RomanToNumberForm = ( props : IRomanToNumberForm ) => {
 
     return (
         <Box {...props.formBoxProps} >
-            <Text> 
-                { props.formTitle }
-            </Text>
+            <Box align="center">
+                <Text weight="bold" size="large"> 
+                    { props.formTitle }
+                </Text>
+            </Box>
             <Form
                 onSubmit={onSubmit}
                 onChange={value => setValue(value)}
@@ -53,31 +55,34 @@ const RomanToNumberForm = ( props : IRomanToNumberForm ) => {
                     <FormField name="numeral" label="Roman Numeral (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
                         <TextInput 
                             name="numeral"
+                            focusIndicator={true}
                         />
                     </FormField>
-                    <Box border="all" pad="small">
-                        Preview of the text with bars on top
-                        &nbsp;
-                        <ShowUpperBars value={value.numeral} />
-                    </Box>
+                    <ShowUpperBars value={value.numeral} />
                     <Button primary type="submit" label="Convert!"/>
                 </Box>
             </Form>
-
-            {
-                value.number && (
-                    <Box>
-                        <Text>{value.number}</Text>
-                    </Box>
-                )
-            }
-            {
-                value.error && (
-                    <Box>
-                        <Text color="red">{value.error}</Text>
-                    </Box>
-                )
-            }
+            <Box align="center">
+                {
+                    value.number && (
+                        <Box border={{size:"medium"}} pad="small" gap="small" fill>
+                            <Text weight="bold">
+                                Result:
+                            </Text>
+                            <Text>
+                                {value.number}
+                            </Text>
+                        </Box>
+                    )
+                }
+                {
+                    value.error && (
+                        <Box>
+                            <Text color="red">{value.error}</Text>
+                        </Box>
+                    )
+                }
+            </Box>
         </Box>
     )
 }

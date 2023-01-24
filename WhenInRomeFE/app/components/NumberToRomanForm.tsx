@@ -41,9 +41,11 @@ const NumberToRomanForm = ( props : IRomanToNumberForm ) => {
 
     return (
         <Box {...props.formBoxProps} >
-            <Text> 
-                { props.formTitle }
-            </Text>
+            <Box align="center">
+                <Text weight="bold" size="large"> 
+                    { props.formTitle }
+                </Text>
+            </Box>
             <Form
                 onSubmit={onSubmit}
                 onChange={value => setValue(value)}
@@ -54,6 +56,7 @@ const NumberToRomanForm = ( props : IRomanToNumberForm ) => {
                         <TextInput 
                             name="number"
                             type="number"
+                            focusIndicator={true}
                         />
                     </FormField>
                     <Button primary type="submit" label="Convert!"/>
@@ -62,9 +65,12 @@ const NumberToRomanForm = ( props : IRomanToNumberForm ) => {
 
             {
                 value.numeral && (
-                    <Box>
-                        <ShowUpperBars value={value.numeral} />
-                    </Box>
+                    <ShowUpperBars 
+                        title="Result:"
+                        bold_title={true}
+                        value={value.numeral}
+                        border={{size:"medium"}}
+                    />
                 )
             }
             {

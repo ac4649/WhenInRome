@@ -43,59 +43,60 @@ const RomanAdditionForm = ( props : IRomanAdditionForm ) => {
 
     return (
         <Box {...props.formBoxProps} >
-            <Text> 
-                { props.formTitle }
-            </Text>
-            <Form
-                onSubmit={onSubmit}
-                onChange={value => setValue(value)}
-                value={value}
-            >
-                <Box gap="small">
-                    <Box direction="row-responsive">
-                        <Box gap="small">
-                            <FormField name="numeral1" label="Roman Numeral (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
-                                <TextInput 
-                                    name="numeral1"
-                                />
-                            </FormField>
-                            <Box border="all" pad="small">
-                                Preview of the text with bars on top
-                                &nbsp;
+            <Box align="center">
+                <Text weight="bold" size="large"> 
+                    { props.formTitle }
+                </Text>
+                <Form
+                    onSubmit={onSubmit}
+                    onChange={value => setValue(value)}
+                    value={value}
+                >
+                    <Box gap="small">
+                        <Box direction="row-responsive" gap="small">
+                            <Box gap="small">
+                                <FormField name="numeral1" label="Roman Numeral 1 (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
+                                    <TextInput 
+                                        name="numeral1"
+                                        focusIndicator={true}
+                                    />
+                                </FormField>
                                 <ShowUpperBars value={value.numeral1} />
                             </Box>
-                        </Box>
-                        <Box gap="small">
-                            <FormField name="numeral2" label="Roman Numeral (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
-                                <TextInput 
-                                    name="numeral2"
-                                />
-                            </FormField>
-                            <Box border="all" pad="small">
-                                Preview of the text with bars on top
-                                &nbsp;
+                            <Box gap="small">
+                                <FormField name="numeral2" label="Roman Numeral 2 (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
+                                    <TextInput 
+                                        name="numeral2"
+                                        focusIndicator={true}
+                                    />
+                                </FormField>
                                 <ShowUpperBars value={value.numeral2} />
                             </Box>
                         </Box>
+                        <Button primary type="submit" label="Add!"/>
                     </Box>
-                    <Button primary type="submit" label="Convert!"/>
-                </Box>
-            </Form>
+                </Form>
 
-            {
-                value.sum && (
-                    <Box>
-                        <ShowUpperBars value={value.sum} />
-                    </Box>
-                )
-            }
-            {
-                value.error && (
-                    <Box>
-                        <Text color="red">{value.error}</Text>
-                    </Box>
-                )
-            }
+                {
+                    value.sum && (
+                        <Box>
+                            <ShowUpperBars 
+                                title="Result:"
+                                bold_title={true}
+                                value={value.sum}
+                                border={{size:"medium"}}
+                            />
+                        </Box>
+                    )
+                }
+                {
+                    value.error && (
+                        <Box>
+                            <Text color="red">{value.error}</Text>
+                        </Box>
+                    )
+                }
+            </Box>
         </Box>
     )
 }
