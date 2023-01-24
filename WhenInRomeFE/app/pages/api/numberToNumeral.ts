@@ -7,20 +7,29 @@ type ResponseData = {
   error ?: string
 }
 
-export default function handler(
+export const config = {
+  api: {
+    responseLimit: false,
+  },
+};
+
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseData>
 ) {
-  axios.get(process.env["BACKEND_URL"] + "/number-to-numeral?number=" + req.query.number).then(
-      (response : AxiosResponse) => {
-        if (response.data.numeral) {
-          res.status(200).json({numeral: response.data.numeral})
-        } else {
-          console.log(response.data.error)
-          res.status(200).json({error: response.data.error})
-        }
-          
+
+  try {
+    let response = await axios.get(process.env["BACKEND_URL"] + "/number-to-numeral?number=" + req.query.number)
+    if (response.data.numeral) {
+      res.status(200).json({numeral: response.data.numeral})
+    } else {
+      if (response.status == 200) {
+        res.status(200).json({error: response.data.error})
+      } else {
+        res.status(200).json({error: "An Unknown Error Occured"})
       }
-  )
-  
+    }
+  } catch (error) {
+    res.status(200).json({error: "An Unknown error occured"})
+  }
 }

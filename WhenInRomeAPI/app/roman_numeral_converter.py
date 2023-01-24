@@ -9,8 +9,14 @@ class RomanNumeralConverter:
             self.numeral = re.sub(r"\s+", "", numeral)
         else:
             self.numeral = numeral
-            
-        self.number = number
+        
+        if number:
+            if isinstance(number, int):
+                self.number = number
+            else:
+                raise Exception("Invalid Number: A given number cannot be decimal")
+        else:
+            self.number = number
 
         # We keep track of the numerals we have encountered as we convert
         self.encoutered_numerals = {}

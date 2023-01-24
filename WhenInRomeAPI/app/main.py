@@ -18,8 +18,13 @@ def convert_roman_to_number_api( numeral : str ):
     return { "number": returned_number }
 
 @app.get("/number-to-numeral")
-def convert_roman_to_number_api( number : int ):
-    converter = RomanNumeralConverter(number = number)
-    returned_numeral = converter.convert_to_roman()
+def convert_roman_to_number_api( number : int | float ):
+    print(number)
+    try:
+        converter = RomanNumeralConverter(number = number)
+        returned_numeral = converter.convert_to_roman()
+    except Exception as exception:
+        return { "error": exception.args[0] }
+
 
     return { "numeral": returned_numeral }
