@@ -50,7 +50,7 @@ const RomanToNumberForm = ( props : IRomanToNumberForm ) => {
                 value={value}
             >
                 <Box gap="small">
-                    <FormField name="numeral" label="Roman Numeral">
+                    <FormField name="numeral" label="Roman Numeral" help="Add a underscore (_) before letter to add a bar to it.">
                         <TextInput 
                             name="numeral"
                         />

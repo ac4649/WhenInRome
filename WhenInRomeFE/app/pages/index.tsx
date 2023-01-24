@@ -25,7 +25,8 @@ export default function Home() {
             formBoxProps={{
               pad: "small",
               background: "white",
-              gap: "xsmall"
+              gap: "xsmall",
+              border: "all"
             }}
           />
           <NumberToRomanForm
@@ -33,7 +34,8 @@ export default function Home() {
             formBoxProps={{
               pad: "small",
               background: "white",
-              gap: "xsmall"
+              gap: "xsmall",
+              border: "all"
             }}
           />
         </Box>
