@@ -6,7 +6,7 @@ from app.roman_numeral_converter import RomanNumeralConverter
 app = FastAPI()
 
 @app.get("/numeral-to-number/")
-def convert_roman_to_number_api( numeral : str ):
+def convert_roman_to_number_api( numeral : str = None ):
 
     converter = RomanNumeralConverter(numeral = numeral)
     try:
@@ -18,8 +18,7 @@ def convert_roman_to_number_api( numeral : str ):
     return { "number": returned_number }
 
 @app.get("/number-to-numeral")
-def convert_roman_to_number_api( number : int | float ):
-    print(number)
+def convert_roman_to_number_api( number : int | float = None):
     try:
         converter = RomanNumeralConverter(number = number)
         returned_numeral = converter.convert_to_roman()

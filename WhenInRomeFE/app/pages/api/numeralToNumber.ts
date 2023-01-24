@@ -21,7 +21,6 @@ export default async function handler(
   try {
     let response = await axios.get(process.env["BACKEND_URL"] + "/numeral-to-number?numeral=" + req.query.numeral)
     if (response.data.number) {
-      console.log(response.data.number)
       res.status(200).json({number: response.data.number})
     } else {
 

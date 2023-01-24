@@ -101,4 +101,16 @@ class RomanNumeral:
         # When we add to the sequence, we increment the number of times found and the value of the sequence
         self.times_found += 1
         self.sequence_sum += self.value
-        
+    
+    def maxRestSequenceValue(self):
+        # The maximum rest of sequence value will be a shift by 1 decimal place
+        # If we subtracted 10 from 100 -> we can only place V and I (5 and 1)s afterwards
+        # This is because we have set the 10's place by doing so
+        if self.numeral in RomanNumeral.valid_subtractions:
+            # We find the number of positional places in the value
+            number_as_string = str(self.value)
+            number_positional_places = len(number_as_string)
+            return 10 ** (number_positional_places - 1) - 1
+
+        # If we aren't dealing with a subtraction, then we simply return the value as we can chain
+        return self.value

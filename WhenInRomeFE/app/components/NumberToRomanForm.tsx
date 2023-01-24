@@ -50,7 +50,7 @@ const NumberToRomanForm = ( props : IRomanToNumberForm ) => {
                 value={value}
             >
                 <Box gap="small">
-                    <FormField name="number" label="Number">
+                    <FormField name="number" label="Number" required>
                         <TextInput 
                             name="number"
                             type="number"
