@@ -20,13 +20,24 @@ class RomanNumeralConverter:
         # 1. We check that repeatable numerals are only present 3 times
         # 2. We check that non-repeatable numerals are not present more than once
         # 3. We subtract subtractable numerals from the sum if we are allowed to
-        for i in range(len(self.numeral)):
+        i = 0
 
+        while i < len(self.numeral):
             # We create the roman numeral for the current character
-            try:
-                cur_numeral = RomanNumeral(self.numeral[i])
-            except Exception as exception:
-                raise exception
+            # We know that the numerals can have their value multiplied by 1000 if they have a bar on top,
+            # We represent this bar on top with a "_" symbol before the character
+            if self.numeral[i] == "_":
+                try:
+                    cur_numeral = RomanNumeral(self.numeral[i:i+2])
+                    i += 1
+                except Exception as exception:
+                    raise exception
+            else:
+                try:
+                    cur_numeral = RomanNumeral(self.numeral[i])
+                except Exception as exception:
+                    raise exception
+
             # We check if our current numeral is the same as our previous numeral
             if cur_numeral.numeral in previous_numerals:
                 # We have the same numeral, we need to check if we are allowed to repeat it
@@ -40,14 +51,22 @@ class RomanNumeralConverter:
                     raise Exception("Invalid Numeral: non-repeatable numeral is repeated")
 
             if i + 1 == len(self.numeral):
-                # We are on the last numeral
+                # We are on the last numeral, so we break
                 returned_number += cur_numeral.value
+                break
             else:
                 # We need to check if the next number is greater, and if it is we need to subtract if possible
-                try:
-                    next_numeral = RomanNumeral(self.numeral[i+1])
-                except Exception as exception:
-                    raise exception
+                if self.numeral[i+1] == "_":
+                    # If we have a "_" then our indeces for the next number are [i + 1 and i + 2]
+                    try:
+                        next_numeral = RomanNumeral(self.numeral[i+1:i+3])
+                    except Exception as exception:
+                        raise exception
+                else:
+                    try:
+                        next_numeral = RomanNumeral(self.numeral[i+1])
+                    except Exception as exception:
+                        raise exception
                 
                 if cur_numeral.value < next_numeral.value:
                     if cur_numeral.subtractable:
@@ -65,6 +84,7 @@ class RomanNumeralConverter:
             else:
                 previous_numerals[cur_numeral.numeral] = 1
 
+            i += 1
         # We cache within the object to be able to retrieve later
         self.number = returned_number
         return returned_number
@@ -83,6 +103,10 @@ class RomanNumeralConverter:
         returned_numeral = ""
 
         conversion_table = {
+            10000: "_X",
+            9000: "_I_X",
+            5000: "_V",
+            4000: "_I_V",
             1000: "M",
             900: "CM",
             500: "D",

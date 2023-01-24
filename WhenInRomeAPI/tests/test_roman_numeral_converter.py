@@ -21,6 +21,10 @@ class TestRomanNumeralConverter:
             RomanNumeralConverter(numeral="XIXXX").convert_to_number()
     
 
+    def test_convert_to_higher_numberes(self):
+        assert RomanNumeralConverter(numeral="_I_V").convert_to_number() == 4000
+
+
     def test_convert_number_to_roman_error(self):
         with pytest.raises(Exception, match="No Number set"):
             RomanNumeralConverter().convert_to_roman()
@@ -33,8 +37,12 @@ class TestRomanNumeralConverter:
         assert RomanNumeralConverter(number=5).convert_to_roman() == "V"
         assert RomanNumeralConverter(number=10).convert_to_roman() == "X"
         assert RomanNumeralConverter(number=50).convert_to_roman() == "L"
+        assert RomanNumeralConverter(number=5000).convert_to_roman() == "_V"
+        assert RomanNumeralConverter(number=10000).convert_to_roman() == "_X"
 
     def test_convert_number_to_roman_edge(self):
         assert RomanNumeralConverter(number=9).convert_to_roman() == "IX"
         assert RomanNumeralConverter(number=49).convert_to_roman() == "XLIX"
         assert RomanNumeralConverter(number=132).convert_to_roman() == "CXXXII"
+        assert RomanNumeralConverter(number=4000).convert_to_roman() == "_I_V"
+        assert RomanNumeralConverter(number=9000).convert_to_roman() == "_I_X"

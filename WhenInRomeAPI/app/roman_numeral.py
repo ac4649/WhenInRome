@@ -11,7 +11,10 @@ class RomanNumeral:
         "L": [ 50, False, False ],
         "C": [ 100, True, True ],
         "D": [ 500, False, False ],
-        "M": [ 1000, True, False ]
+        "M": [ 1000, True, False ],
+        "_I": [1000, True, True],
+        "_V": [5000, False, False],
+        "_X": [10000, True, True]
     }
     
     # By default our numerals are repeatable, but not subtractable
