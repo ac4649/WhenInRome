@@ -66,7 +66,6 @@ class RomanNumeral:
 
         # We keep track of the number of times this numeral was found
         self.times_found = 0
-        self.sequence_sum = 0
 
     # A numeral can be subtracted from if:
     # It has not been subtracted from before
@@ -100,7 +99,6 @@ class RomanNumeral:
     def addToSequence(self):
         # When we add to the sequence, we increment the number of times found and the value of the sequence
         self.times_found += 1
-        self.sequence_sum += self.value
     
     def maxRestSequenceValue(self):
         # The maximum rest of sequence value will be a shift by 1 decimal place
