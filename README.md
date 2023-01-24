@@ -14,12 +14,14 @@ The Back End is a FastAPI application which will have routes for the various tas
 Routes and there descriptions are described below:
 ### /numeral-to-number
 Parameters: numeral (string)
+
 Returns: {
     number: ###
 }
 
 ### /number-to-numeral
 Parameters: number
+
 Returns: {
     numeral: ""
 }
@@ -28,9 +30,13 @@ Returns: {
 
 For numbers with a bar on top, the unicode symbols do not exist or they would have been used
 So they are encoded by adding an underscore in front of the letter:
+
 _I
+
 _V
+
 _X
+
 ...
 
 The front end will parse the "_" and display the text-decoration: overline instead
@@ -45,15 +51,18 @@ To run the backend, start by running `cd WhenInRomeAPI` to go into the backend a
 The conda environment dependencies required are defined in "conda_environment.yml"
 
 To create the conda environment with the requirements you can run:
+
 `conda env create -f conda_environment.yml -n WhenInRomeEnv`
 
 activate the env:
+
 `conda activate WhenInRomeEnv`
 
 When the environment is created, please run:
 `uvicorn app.main:app --reload`
 
 To run the unit tests run:
+
 `pytest`
 
 This will start the backend in development mode and reload any changed to the files
