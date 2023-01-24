@@ -45,7 +45,7 @@ export default function Home() {
           </Box>
           <Box direction="row" fill  align="center">
             <RomanAdditionForm
-              formTitle = "Add Roman Numbers"
+              formTitle = "Add Roman Numerals"
               formBoxProps={{
                 pad: "small",
                 background: "white",
