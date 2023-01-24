@@ -24,6 +24,16 @@ Returns: {
     numeral: ""
 }
 
+### Note about numbers with a bar on top
+
+For numbers with a bar on top, the unicode symbols do not exist or they would have been used
+So they are encoded by adding an underscore in front of the letter:
+_I
+_V
+_X
+...
+
+The front end will parse the "_" and display the text-decoration: overline instead
 
 ## Installation and Running
 
@@ -44,3 +54,12 @@ When the environment is created, please run:
 `uvicorn main:app --reload`
 
 This will start the backend in development mode and reload any changed to the files
+
+### Running the Front End
+
+The front end is a NextJS application which was built using yarn.
+In order to run the front end, use Yarn
+
+then do `yarn install` from the "WhenInRomeFE" directory
+
+then to run the application `yarn dev` to run in development mode
