@@ -8,6 +8,8 @@ app = FastAPI()
 @app.get("/numeral-to-number/")
 def convert_roman_to_number_api( numeral : str = None ):
 
+    # We make sure our numeral is upper case
+    numeral = numeral.upper()
     converter = RomanNumeralConverter(numeral = numeral)
     try:
         returned_number = converter.convert_to_number()
@@ -32,6 +34,9 @@ def convert_roman_to_number_api( number : int | float = None):
 @app.get("/roman_addition")
 def roman_addition( numeral1 : str = None, numeral2 : str = None):
     try:
+        # We make sure our numerals are upper case
+        numeral1 = numeral1.upper()
+        numeral2 = numeral2.upper()
         converter1 = RomanNumeralConverter(numeral = numeral1)
         converter2 = RomanNumeralConverter(numeral = numeral2)
         converted_number1 = converter1.convert_to_number()
