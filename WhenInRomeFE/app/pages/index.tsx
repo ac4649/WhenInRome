@@ -21,9 +21,9 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <Box gap="small">
-          <Box direction="row-responsive" gap="small">
+          <Box direction="row-responsive" gap="small" fill>
             <RomanToNumberForm
-              formTitle = "Convert from Roman Numerals to Numbers:"
+              formTitle = "Convert from Roman Numerals to Numbers"
               formBoxProps={{
                 pad: "small",
                 background: "white",
@@ -32,7 +32,7 @@ export default function Home() {
               }}
             />
             <NumberToRomanForm
-              formTitle = "Convert from Number to Roman Numeral:"
+              formTitle = "Convert from Number to Roman Numerals"
               formBoxProps={{
                 pad: "small",
                 background: "white",
@@ -43,7 +43,7 @@ export default function Home() {
           </Box>
           <Box direction="row" fill>
             <RomanAdditionForm
-              formTitle = "Add Roman Numbers:"
+              formTitle = "Add Roman Numbers"
               formBoxProps={{
                 pad: "small",
                 background: "white",

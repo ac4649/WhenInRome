@@ -41,9 +41,11 @@ const RomanToNumberForm = ( props : IRomanToNumberForm ) => {
 
     return (
         <Box {...props.formBoxProps} >
-            <Text> 
-                { props.formTitle }
-            </Text>
+            <Box align="center">
+                <Text weight="bold"> 
+                    { props.formTitle }
+                </Text>
+            </Box>
             <Form
                 onSubmit={onSubmit}
                 onChange={value => setValue(value)}
@@ -55,29 +57,31 @@ const RomanToNumberForm = ( props : IRomanToNumberForm ) => {
                             name="numeral"
                         />
                     </FormField>
-                    <Box border="all" pad="small">
-                        Preview of the text with bars on top
-                        &nbsp;
-                        <ShowUpperBars value={value.numeral} />
-                    </Box>
+                    <ShowUpperBars value={value.numeral} />
                     <Button primary type="submit" label="Convert!"/>
                 </Box>
             </Form>
-
-            {
-                value.number && (
-                    <Box>
-                        <Text>{value.number}</Text>
-                    </Box>
-                )
-            }
-            {
-                value.error && (
-                    <Box>
-                        <Text color="red">{value.error}</Text>
-                    </Box>
-                )
-            }
+            <Box align="center">
+                {
+                    value.number && (
+                        <Box direction="row" gap="small">
+                            <Text weight="bold">
+                                Result:
+                            </Text>
+                            <Text>
+                                {value.number}
+                            </Text>
+                        </Box>
+                    )
+                }
+                {
+                    value.error && (
+                        <Box>
+                            <Text color="red">{value.error}</Text>
+                        </Box>
+                    )
+                }
+            </Box>
         </Box>
     )
 }

@@ -43,49 +43,43 @@ const RomanAdditionForm = ( props : IRomanAdditionForm ) => {
 
     return (
         <Box {...props.formBoxProps} >
-            <Text> 
-                { props.formTitle }
-            </Text>
+            <Box align="center">
+                <Text weight="bold"> 
+                    { props.formTitle }
+                </Text>
+            </Box>
             <Form
                 onSubmit={onSubmit}
                 onChange={value => setValue(value)}
                 value={value}
             >
                 <Box gap="small">
-                    <Box direction="row-responsive">
+                    <Box direction="row-responsive" gap="small">
                         <Box gap="small">
-                            <FormField name="numeral1" label="Roman Numeral (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
+                            <FormField name="numeral1" label="Roman Numeral 1 (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
                                 <TextInput 
                                     name="numeral1"
                                 />
                             </FormField>
-                            <Box border="all" pad="small">
-                                Preview of the text with bars on top
-                                &nbsp;
-                                <ShowUpperBars value={value.numeral1} />
-                            </Box>
+                            <ShowUpperBars value={value.numeral1} />
                         </Box>
                         <Box gap="small">
-                            <FormField name="numeral2" label="Roman Numeral (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
+                            <FormField name="numeral2" label="Roman Numeral 2 (Viniculum Notation)" help="Add _ before a letter I or X to multiply it by 1,000" required>
                                 <TextInput 
                                     name="numeral2"
                                 />
                             </FormField>
-                            <Box border="all" pad="small">
-                                Preview of the text with bars on top
-                                &nbsp;
-                                <ShowUpperBars value={value.numeral2} />
-                            </Box>
+                            <ShowUpperBars value={value.numeral2} />
                         </Box>
                     </Box>
-                    <Button primary type="submit" label="Convert!"/>
+                    <Button primary type="submit" label="Add!"/>
                 </Box>
             </Form>
 
             {
                 value.sum && (
                     <Box>
-                        <ShowUpperBars value={value.sum} />
+                        <ShowUpperBars title="Result:" value={value.sum} />
                     </Box>
                 )
             }
