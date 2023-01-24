@@ -76,12 +76,11 @@ To run in production mode:
 The front end is a NextJS application which was built using yarn (https://yarnpkg.com).
 In order to run the front end, use Yarn
 
-Create a ".env.local" file (sample.env.local file for reference) containing the Backend url to which the Front end should connect
-
 go to the app directory by:
 
 `cd WhenInRomeAPI/app`
 
+Create a ".env.local" file (sample.env.local file for reference) containing the Backend url to which the Front end should connect
 
 then do `yarn install` from the "WhenInRomeFE" directory
 
