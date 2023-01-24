@@ -70,7 +70,7 @@ class RomanNumeral:
     # A numeral can be subtracted from if:
     # It has not been subtracted from before
     # It hasn't appeared in the sequence yet and is not repeatable
-    def canBeSubtractedFrom(self):
+    def can_be_subtracted_from(self):
         if self.found_subtracted_element:
             return False
         if not self.repeatable and self.times_found > 0:
@@ -81,7 +81,7 @@ class RomanNumeral:
     # It has not been found too many times (based on repeatability)
     # It has not been done being found
     # We have already subtracted from it
-    def canBeAdded(self):
+    def can_be_added(self):
         if self.done_finding:
             return False
         if self.found_subtracted_element:
@@ -96,11 +96,11 @@ class RomanNumeral:
 
         return True
 
-    def addToSequence(self):
+    def add_to_sequence(self):
         # When we add to the sequence, we increment the number of times found and the value of the sequence
         self.times_found += 1
     
-    def maxRestSequenceValue(self):
+    def max_rest_sequence_value(self):
         # The maximum rest of sequence value will be a shift by 1 decimal place
         # If we subtracted 10 from 100 -> we can only place V and I (5 and 1)s afterwards
         # This is because we have set the 10's place by doing so

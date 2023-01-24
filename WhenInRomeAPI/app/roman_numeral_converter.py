@@ -44,7 +44,7 @@ class RomanNumeralConverter:
         return self.encoutered_numerals[numeral_label], new_index - 1
     
     def check_add_update_number_and_new_largest_value( self, new_numeral : RomanNumeral, position : int ):
-        if not new_numeral.canBeAdded():
+        if not new_numeral.can_be_added():
             raise Exception(f'Invalid Numeral: {new_numeral.numeral} Cannot be added at position {position}')
         
         # We check if our new numeral is too large
@@ -53,11 +53,11 @@ class RomanNumeralConverter:
                 raise Exception("Invalid Numeral: Remaining sequence is larger")
 
         # And add it to the sequence
-        new_numeral.addToSequence()
+        new_numeral.add_to_sequence()
 
         # Every time we end a sequence we update the largest_new_value and the number
         self.number += new_numeral.value
-        self.largest_new_value = new_numeral.maxRestSequenceValue()
+        self.largest_new_value = new_numeral.max_rest_sequence_value()
         # We return the largetst sequence value for next itteration
         return True
 
@@ -109,7 +109,7 @@ class RomanNumeralConverter:
                 if RomanNumeral.is_valid_subtraction(cur_numeral.numeral, next_numeral.numeral):
                     # We have a valid subtraction so we need to take it into account
                     # We first check if we can subtract from the next_numeral
-                    if not next_numeral.canBeSubtractedFrom():
+                    if not next_numeral.can_be_subtracted_from():
                         raise Exception("Invalid Numeral: Cannot subtract properly")
 
                     # If we are allowed to subtract, we generate the new combined numeral
