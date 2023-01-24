@@ -27,6 +27,9 @@ class TestRomanNumeralConverter:
         with pytest.raises(Exception, match="Invalid Numeral: Remaining sequence is larger"):
             RomanNumeralConverter(numeral="CXLX").convert_to_number()
 
+        with pytest.raises(Exception, match="Invalid Numeral: Remaining sequence is larger"):
+            RomanNumeralConverter(numeral="XIXXX").convert_to_number()
+
     def test_convert_to_number_cannot_be_subtracted(self):
         with pytest.raises(Exception, match="Invalid Numeral: Cannot subtract properly"):
             RomanNumeralConverter(numeral="VIV").convert_to_number()
@@ -39,8 +42,6 @@ class TestRomanNumeralConverter:
         with pytest.raises(Exception, match="Invalid Numeral: V Cannot be added at position 1"):
             RomanNumeralConverter(numeral="VV").convert_to_number()
 
-        with pytest.raises(Exception, match="Invalid Numeral: X Cannot be added at position 4"):
-            RomanNumeralConverter(numeral="XIXXX").convert_to_number()
 
     
     def test_convert_to_number_edge_cases(self):
