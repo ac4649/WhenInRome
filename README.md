@@ -82,11 +82,13 @@ go to the app directory by:
 
 Create a ".env.local" file (sample.env.local file for reference) containing the Backend url to which the Front end should connect
 
-then do `yarn install` from the "WhenInRomeFE" directory
+then do `yarn install`
 
-then to run the application `yarn dev` to run in development mode
+to run the application in development mode:
 
-to run in production mode
+run `yarn dev`
 
-run `yarn next build`
-then `yarn start`
+
+to run in production mode:
+
+run `yarn next build` then `yarn start`
