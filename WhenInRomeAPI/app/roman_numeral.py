@@ -60,8 +60,7 @@ class RomanNumeral:
         self.repeatable = RomanNumeral.valid_numerals[self.numeral][1]
         self.subtractable = RomanNumeral.valid_numerals[self.numeral][2]
 
-        # We keep track of wether we are done finding this numeral
-        self.done_finding = False
+
         self.found_subtracted_element = False
 
         # We keep track of the number of times this numeral was found
@@ -79,11 +78,8 @@ class RomanNumeral:
 
     # A number can be added to the sequence if:
     # It has not been found too many times (based on repeatability)
-    # It has not been done being found
     # We have already subtracted from it
     def can_be_added(self):
-        if self.done_finding:
-            return False
         if self.found_subtracted_element:
             return False
         if self.times_found > 0:
