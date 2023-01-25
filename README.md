@@ -78,7 +78,7 @@ In order to run the front end, use Yarn
 
 go to the app directory by:
 
-`cd WhenInRomeAPI/app`
+`cd WhenInRomeFE/app`
 
 Create a ".env.local" file (sample.env.local file for reference) containing the Backend url to which the Front end should connect
 
